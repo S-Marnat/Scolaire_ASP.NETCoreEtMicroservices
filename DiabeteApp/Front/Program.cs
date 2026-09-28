@@ -31,6 +31,11 @@ builder.Services.AddHttpClient<NoteApiService>(client =>
     client.BaseAddress = new Uri(urlGateway);
 });
 
+builder.Services.AddHttpClient<RisqueApiService>(client =>
+{
+    client.BaseAddress = new Uri(urlGateway);
+});
+
 builder.Services.AddHttpClient("GatewayClient", client =>
 {
     client.BaseAddress = new Uri(urlGateway);

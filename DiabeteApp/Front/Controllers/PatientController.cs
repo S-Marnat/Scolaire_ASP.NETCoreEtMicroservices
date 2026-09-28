@@ -8,11 +8,13 @@ namespace Front.Controllers
     {
         private readonly PatientApiService _patientApiService;
         private readonly NoteApiService _noteApiService;
+        private readonly RisqueApiService _risqueApiService;
 
-        public PatientController(PatientApiService patientApiService, NoteApiService noteApiService)
+        public PatientController(PatientApiService patientApiService, NoteApiService noteApiService, RisqueApiService risqueApiService)
         {
             _patientApiService = patientApiService;
             _noteApiService = noteApiService;
+            _risqueApiService = risqueApiService;
         }
 
         // GET: Patient
@@ -29,6 +31,7 @@ namespace Front.Controllers
         {
             var patient = await _patientApiService.GetPatientByIdAsync(id);
             var notes = await _noteApiService.GetNotesByPatientIdAsync(id);
+            var risque = await _risqueApiService.GetRisqueByPatientIdAsync(id);
 
             if (patient == null)
                 return NotFound();
@@ -36,7 +39,8 @@ namespace Front.Controllers
             var viewModel = new FichePatientViewModel
             {
                 Patient = patient,
-                Notes = notes
+                Notes = notes,
+                Risque = risque
             };
 
             return View(viewModel);

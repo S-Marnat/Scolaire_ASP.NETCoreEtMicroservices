@@ -20,6 +20,10 @@
             })
         </div>
 
+        <div class="my-5">
+            @await Html.PartialAsync("RisquePatient", Model.Risque)
+        </div>
+
         <div class=" mb-4 text-center">
             <a class="btn btn-secondary"
                     asp-controller="Patient"

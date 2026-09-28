@@ -20,8 +20,6 @@ namespace Front.Services
         {
             var response = await SendWithRefreshAsync(() => _httpClient.GetAsync($"/note/patient/{patientId}"));
 
-            Console.WriteLine("STATUS NOTES: " + response.StatusCode);
-
             if (!response.IsSuccessStatusCode)
                 return new List<NoteListPatientViewModel>();
 
