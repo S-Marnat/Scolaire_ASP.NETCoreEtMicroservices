@@ -5,5 +5,6 @@
   <Project Path="Notes/Notes.csproj" Id="9d0f97ff-3ef6-4f89-b64f-6cf2846d626c" />
   <Project Path="Patients.Tests/Patients.Tests.csproj" Id="b1963a78-4bd2-416c-b9ff-1b5e4fd1dcb5" />
   <Project Path="Patients/Patients.csproj" />
+  <Project Path="Risques.Tests/Risques.Tests.csproj" Id="0ab0ba61-d61f-4d8b-968e-aea95836fa80" />
   <Project Path="Risques/Risques.csproj" Id="b0b74115-b2e2-4e59-bbb1-e8c427ad762d" />
 </Solution>

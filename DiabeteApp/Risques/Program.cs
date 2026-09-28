@@ -12,6 +12,7 @@ var urlGateway = "https://localhost:7181"; // URL du Gateway
 
 // Configuration des dépendances
 builder.Services.AddScoped<IRisqueService, RisqueService>();
+builder.Services.AddScoped<IDateProvider, SystemDateProvider>();
 
 builder.Services.AddControllers();
 

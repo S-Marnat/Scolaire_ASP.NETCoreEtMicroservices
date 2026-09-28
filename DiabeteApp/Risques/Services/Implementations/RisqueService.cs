@@ -7,16 +7,18 @@ namespace Risques.Services.Implementations
     {
         private readonly IPatientApiService _patientApiService;
         private readonly INoteApiService _noteApiService;
+        private readonly IDateProvider _dateProvider;
 
-        public RisqueService(IPatientApiService patientApiService, INoteApiService noteApiService)
+        public RisqueService(IPatientApiService patientApiService, INoteApiService noteApiService, IDateProvider dateProvider)
         {
             _patientApiService = patientApiService;
             _noteApiService = noteApiService;
+            _dateProvider = dateProvider;
         }
 
         public async Task<int> CalculerAgePatientAsync(DateTime dateDeNaissance)
         {
-            var today = DateTime.Today;
+            var today = _dateProvider.Today;
             var age = today.Year - dateDeNaissance.Year;
 
             if (dateDeNaissance.Date > today.AddYears(-age))
