@@ -1,7 +1,7 @@
 using Front.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var urlGateway = "https://localhost:7181"; // URL du Gateway
+var urlGateway = "http://gateway:8080"; // URL du Gateway
 
 
 // Configuration des dépendances
@@ -52,7 +52,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); // Désactivé pour Docker
 app.UseRouting();
 
 app.UseSession();

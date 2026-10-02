@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
   <Project Path="Front/Front.csproj" />
   <Project Path="Gateway/Gateway.csproj" />
   <Project Path="Notes.Tests/Notes.Tests.csproj" Id="a88373d8-ef57-4d50-ba08-14bb47c50487" />

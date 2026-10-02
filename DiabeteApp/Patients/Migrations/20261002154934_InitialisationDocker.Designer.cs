@@ -12,8 +12,8 @@ using Patients.Data;
 namespace Patients.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260918112541_ImplementationJWT")]
-    partial class ImplementationJWT
+    [Migration("20261002154934_InitialisationDocker")]
+    partial class InitialisationDocker
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

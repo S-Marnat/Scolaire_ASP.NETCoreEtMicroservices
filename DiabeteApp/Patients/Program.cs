@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Patients.Data;
 using Patients.Repositories.Implementations;
 using Patients.Repositories.Interfaces;
 using Patients.Services.Implementations;
 using Patients.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -116,6 +117,28 @@ async Task SeedRolesAndUsers(IServiceProvider services)
 var app = builder.Build();
 
 
+// Application des migrations de la base de données pour la conteuneurisation
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var retryCount = 0;
+    var maxRetries = 10;
+
+    while (retryCount < maxRetries)
+    {
+        try
+        {
+            db.Database.Migrate();
+            break;
+        }
+        catch (SqlException)
+        {
+            retryCount++;
+            Thread.Sleep(2000); // Attendre 2 secondes
+        }
+    }
+}
+
 // Appel de la méthode pour créer le rôle et l'utilisateur par défaut
 using (var scope = app.Services.CreateScope())
 {
@@ -125,7 +148,7 @@ using (var scope = app.Services.CreateScope())
 
 
 // Pipeline HTTP
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); // Désactivé pour Docker
 
 app.UseAuthentication();
 app.UseAuthorization();

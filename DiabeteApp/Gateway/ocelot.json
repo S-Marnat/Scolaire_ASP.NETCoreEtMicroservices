@@ -4,8 +4,8 @@
       "DownstreamPathTemplate": "/api/account/login",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7088
+          "Host": "patients",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/account/login",
@@ -16,8 +16,8 @@
       "DownstreamPathTemplate": "/api/account/logout",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7088
+          "Host": "patients",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/account/logout",
@@ -28,8 +28,8 @@
       "DownstreamPathTemplate": "/api/account/refresh",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7088
+          "Host": "patients",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/account/refresh",
@@ -41,8 +41,8 @@
       "DownstreamPathTemplate": "/api/patient",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7088
+          "Host": "patients",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/patient",
@@ -57,8 +57,8 @@
       "DownstreamPathTemplate": "/api/patient/{id}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7088
+          "Host": "patients",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/patient/{id}",
@@ -73,8 +73,8 @@
       "DownstreamPathTemplate": "/api/note/patient/{idPatient}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7083
+          "Host": "notes",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/note/patient/{idPatient}",
@@ -88,8 +88,8 @@
       "DownstreamPathTemplate": "/api/note/{id}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7083
+          "Host": "notes",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/note/{id}",
@@ -103,8 +103,8 @@
       "DownstreamPathTemplate": "/api/note",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7083
+          "Host": "notes",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/note",
@@ -119,8 +119,8 @@
       "DownstreamPathTemplate": "/api/risque/patient/{idPatient}",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7097
+          "Host": "risques",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/risque/patient/{idPatient}",
@@ -133,6 +133,6 @@
   ],
 
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7181"
+    "BaseUrl": "http://gateway:8080"
   }
 }

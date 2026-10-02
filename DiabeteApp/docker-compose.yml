@@ -1,0 +1,90 @@
+# -- Services de base de données et microservices --
+
+services:
+
+  # -- Bases de données --
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - default
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - default
+
+
+  # -- Microservices --
+
+  patients:
+    image: ${DOCKER_REGISTRY-}patients
+    container_name: patients
+    build:
+      context: .
+      dockerfile: Patients/Dockerfile
+    depends_on:
+      - sqlserver
+    networks:
+      - default
+
+  notes:
+    image: ${DOCKER_REGISTRY-}notes
+    container_name: notes
+    build:
+      context: .
+      dockerfile: Notes/Dockerfile
+    depends_on:
+      - mongodb
+    networks:
+      - default
+
+  risques:
+    image: ${DOCKER_REGISTRY-}risques
+    container_name: risques
+    build:
+      context: .
+      dockerfile: Risques/Dockerfile
+    networks:
+      - default
+
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    depends_on:
+      - patients
+      - notes
+      - risques
+    networks:
+      - default
+
+  front:
+    image: ${DOCKER_REGISTRY-}front
+    container_name: front
+    build:
+      context: .
+      dockerfile: Front/Dockerfile
+    depends_on:
+      - gateway
+    networks:
+      - default
+     
+
+# -- Volumes et réseaux --
+
+volumes:
+  sqlserver-data:
+  mongodb-data:
+
+networks:
+  default:
+    driver: bridge

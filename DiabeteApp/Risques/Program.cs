@@ -7,7 +7,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
-var urlGateway = "https://localhost:7181"; // URL du Gateway
+var urlGateway = "http://gateway:8080"; // URL du Gateway
 
 
 // Configuration des dépendances
@@ -67,7 +67,7 @@ var app = builder.Build();
 
 
 // Pipeline HTTP
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); // Désactivé pour Docker
 
 app.UseAuthentication();
 app.UseAuthorization();

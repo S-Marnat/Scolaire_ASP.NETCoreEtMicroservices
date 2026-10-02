@@ -28,10 +28,18 @@ builder.Services.AddSingleton<MongoDbSettings>(sp =>
     sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<MongoDbSettings>>().Value);
 
 var mongoSettings = builder.Configuration.GetSection("MongoDb").Get<MongoDbSettings>();
+
+// Surcharge éventuelle de la ConnectionString via variable d'environnement
+var envConnectionString = Environment.GetEnvironmentVariable("Mongo__ConnectionString");
+if (!string.IsNullOrWhiteSpace(envConnectionString))
+{
+    mongoSettings.ConnectionString = envConnectionString;
+}
+
+// Utilisation des settings pour créer le client et la database
 var client = new MongoClient(mongoSettings.ConnectionString);
 var database = client.GetDatabase(mongoSettings.DatabaseName);
 var notesCollection = database.GetCollection<Note>(mongoSettings.NotesCollectionName);
-
 
 // Appel du seeder
 MongoSeeder.Seed(notesCollection);
@@ -71,7 +79,7 @@ var app = builder.Build();
 
 
 // Pipeline HTTP
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); // Désactivé pour Docker
 
 app.UseAuthentication();
 app.UseAuthorization();

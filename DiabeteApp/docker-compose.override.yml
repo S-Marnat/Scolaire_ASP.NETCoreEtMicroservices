@@ -1,0 +1,52 @@
+services:
+  sqlserver:
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123!
+    ports:
+      - "1433:1433"
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=Password123!
+    ports:
+      - "27017:27017"
+
+  patients:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - JWT_SECRET_KEY=4654e755-8035-4447-9605-ddedc8cbfd52cc32cd11-febb-4a3e-bcd4-57192a48a832
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=DiabeteApp_Patients;User Id=sa;Password=Password123!;TrustServerCertificate=True
+    ports:
+      - "7088:8080"
+  
+  notes:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - JWT_SECRET_KEY=4654e755-8035-4447-9605-ddedc8cbfd52cc32cd11-febb-4a3e-bcd4-57192a48a832
+      - MongoDb__ConnectionString=mongodb://admin:Password123!@mongodb:27017/DiabeteApp_Notes?authSource=admin
+      - MongoDb__DatabaseName=DiabeteApp
+      - MongoDb__CollectionName=Notes
+    ports:
+      - "7083:8080"
+
+  risques:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - JWT_SECRET_KEY=4654e755-8035-4447-9605-ddedc8cbfd52cc32cd11-febb-4a3e-bcd4-57192a48a832
+    ports:
+      - "7097:8080"
+
+  gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - JWT_SECRET_KEY=4654e755-8035-4447-9605-ddedc8cbfd52cc32cd11-febb-4a3e-bcd4-57192a48a832
+    ports:
+      - "7181:8080"
+
+  front:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:8080"

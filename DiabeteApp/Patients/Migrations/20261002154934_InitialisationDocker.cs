@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Patients.Migrations
 {
     /// <inheritdoc />
-    public partial class ImplementationJWT : Migration
+    public partial class InitialisationDocker : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
