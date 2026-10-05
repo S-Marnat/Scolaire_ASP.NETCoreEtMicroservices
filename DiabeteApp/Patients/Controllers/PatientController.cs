@@ -89,23 +89,4 @@ public class PatientController : ControllerBase
             return StatusCode(500, "Une erreur interne est survenue.");
         }
     }
-
-    // DELETE: api/Patient/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeletePatient(int id)
-    {
-        try
-        {
-            var result = await _patientService.DeleteAsync(id);
-
-            if (!result)
-                return NotFound("L'Id renseigné ne correspond à aucun patient.");
-
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "Une erreur interne est survenue.");
-        }
-    }
 }

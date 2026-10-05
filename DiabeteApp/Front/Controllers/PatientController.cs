@@ -103,26 +103,5 @@ namespace Front.Controllers
             await _patientApiService.UpdatePatientAsync(id, model);
             return RedirectToAction("Index");
         }
-
-        // GET: Patient/Delete/5
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var patient = await _patientApiService.GetPatientByIdAsync(id);
-
-            if (patient == null)
-                return NotFound();
-
-            return View(patient);
-        }
-
-        // POST: Patient/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _patientApiService.DeletePatientAsync(id);
-            return RedirectToAction("Index");
-        }
     }
 }

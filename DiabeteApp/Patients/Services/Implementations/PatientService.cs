@@ -35,12 +35,6 @@ namespace Patients.Services.Implementations
             return ToReadDto(created);
         }
 
-        public async Task<bool> DeleteAsync(int id)
-        {
-            // Appeler le repository
-            return await _patientRepository.DeleteAsync(id);
-        }
-
         public async Task<IEnumerable<PatientReadDto>> GetAllAsync()
         {
             // Appeler le repository

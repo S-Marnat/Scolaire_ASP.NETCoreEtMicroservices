@@ -330,52 +330,5 @@ namespace Patients.Tests.UnitTests.Controllers
             Assert.Equal(500, internalServerError.StatusCode);
             Assert.Equal("Une erreur interne est survenue.", internalServerError.Value);
         }
-
-
-        // -- DeletePatient --
-
-        [Fact]
-        public async Task DeletePatient_IdValide_RetourneNoContent()
-        {
-            // Arrange
-            _serviceMock.Setup(s => s.DeleteAsync(1)).ReturnsAsync(true);
-
-            // Act
-            var result = await _controller.DeletePatient(1);
-
-            // Assert
-            Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public async Task DeletePatient_IdInexistant_RetourneNotFound()
-        {
-            // Arrange
-            _serviceMock.Setup(s => s.DeleteAsync(999))
-                .ReturnsAsync(false);
-
-            // Act
-            var result = await _controller.DeletePatient(999);
-
-            // Assert
-            var notFound = Assert.IsType<NotFoundObjectResult>(result);
-            Assert.Equal("L'Id renseigné ne correspond à aucun patient.", notFound.Value);
-        }
-
-        [Fact]
-        public async Task DeletePatient_ServiceLanceException_RetourneInternalServerError()
-        {
-            // Arrange
-            _serviceMock.Setup(s => s.DeleteAsync(It.IsAny<int>()))
-                .ThrowsAsync(new Exception("Erreur de test"));
-
-            // Act
-            var result = await _controller.DeletePatient(1);
-
-            // Assert
-            var internalServerError = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(500, internalServerError.StatusCode);
-            Assert.Equal("Une erreur interne est survenue.", internalServerError.Value);
-        }
     }
 }

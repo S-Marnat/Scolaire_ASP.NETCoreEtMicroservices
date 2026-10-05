@@ -148,8 +148,6 @@ using (var scope = app.Services.CreateScope())
 
 
 // Pipeline HTTP
-//app.UseHttpsRedirection(); // Désactivé pour Docker
-
 app.UseAuthentication();
 app.UseAuthorization();
 

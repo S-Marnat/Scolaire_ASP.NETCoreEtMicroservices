@@ -86,41 +86,6 @@ namespace Patients.Tests.UnitTests.Services
         }
 
 
-        // -- DeleteAsync --
-
-        [Fact]
-        public async Task DeleteAsync_IdValide_RetourneTrue()
-        {
-            // Arrange
-            int id = 1;
-            _repositoryMock.Setup(r => r.DeleteAsync(id))
-                .ReturnsAsync(true);
-
-            // Act
-            var result = await _service.DeleteAsync(id);
-
-            // Assert
-            _repositoryMock.Verify(r => r.DeleteAsync(id), Times.Once);
-            Assert.True(result);
-        }
-
-        [Fact]
-        public async Task DeleteAsync_IdInexistant_RetourneFalse()
-        {
-            // Arrange
-            int id = 999;
-            _repositoryMock.Setup(r => r.DeleteAsync(id))
-                .ReturnsAsync(false);
-
-            // Act
-            var result = await _service.DeleteAsync(id);
-
-            // Assert
-            _repositoryMock.Verify(r => r.DeleteAsync(id), Times.Once);
-            Assert.False(result);
-        }
-
-
         // -- GetAllAsync --
 
         [Fact]

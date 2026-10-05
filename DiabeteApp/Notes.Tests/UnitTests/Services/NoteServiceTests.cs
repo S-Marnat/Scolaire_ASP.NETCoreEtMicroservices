@@ -71,41 +71,6 @@ namespace Notes.Tests.UnitTests.Services
         }
 
 
-        // -- DeleteAsync --
-
-        [Fact]
-        public async Task DeleteAsync_IdValide_RetourneTrue()
-        {
-            // Arrange
-            string id = "1";
-            _repositoryMock.Setup(r => r.DeleteAsync(id))
-                .ReturnsAsync(true);
-
-            // Act
-            var result = await _service.DeleteAsync(id);
-
-            // Assert
-            _repositoryMock.Verify(r => r.DeleteAsync(id), Times.Once);
-            Assert.True(result);
-        }
-
-        [Fact]
-        public async Task DeleteAsync_IdInexistant_RetourneFalse()
-        {
-            // Arrange
-            string id = "999";
-            _repositoryMock.Setup(r => r.DeleteAsync(id))
-                .ReturnsAsync(false);
-
-            // Act
-            var result = await _service.DeleteAsync(id);
-
-            // Assert
-            _repositoryMock.Verify(r => r.DeleteAsync(id), Times.Once);
-            Assert.False(result);
-        }
-
-
         // -- GetByPatientAsync --
 
         [Fact]
@@ -183,64 +148,6 @@ namespace Notes.Tests.UnitTests.Services
 
             // Assert
             _repositoryMock.Verify(r => r.GetByIdAsync(id), Times.Once);
-            Assert.Null(result);
-        }
-
-
-        // -- UpdateAsync --
-
-        [Fact]
-        public async Task UpdateAsync_IdCorrespond_MetAJourNote()
-        {
-            // Arrange
-            var dto = new NoteUpdateDto
-            {
-                Contenu = "Contenu Test 1"
-            };
-
-            var entity = new Note
-            {
-                Id = "1",
-                Contenu = "Contenu Update 1",
-                DateCreation = new DateTime(2026, 1, 1),
-                IdPatient = 1
-            };
-
-            _repositoryMock.Setup(r => r.GetByIdAsync("1"))
-                .ReturnsAsync(entity);
-
-            _repositoryMock.Setup(r => r.UpdateAsync(It.IsAny<Note>()))
-                .ReturnsAsync(entity);
-
-            // Act
-            var result = await _service.UpdateAsync("1", dto);
-
-            // Assert
-            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Note>()), Times.Once);
-            Assert.NotNull(result);
-            Assert.Equal(entity.Id, result.Id);
-            Assert.Equal(entity.Contenu, result.Contenu);
-            Assert.Equal(entity.DateCreation, result.DateCreation);
-            Assert.Equal(entity.IdPatient, result.IdPatient);
-        }
-
-        [Fact]
-        public async Task UpdateAsync_IdInexistant_RetourneNull()
-        {
-            // Arrange
-            var dto = new NoteUpdateDto
-            {
-                Contenu = "Contenu Test 1",
-            };
-
-            _repositoryMock.Setup(r => r.GetByIdAsync("999"))
-                .ReturnsAsync((Note?)null);
-            
-            // Act
-            var result = await _service.UpdateAsync("999", dto);
-
-            // Assert
-            _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Note>()), Times.Never);
             Assert.Null(result);
         }
     }

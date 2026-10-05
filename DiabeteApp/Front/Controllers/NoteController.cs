@@ -41,7 +41,6 @@ namespace Front.Controllers
                 return View(model);
             }
 
-            // Retour à la fiche patient
             return RedirectToAction("FichePatient", "Patient", new { id = model.IdPatient });
         }
     }

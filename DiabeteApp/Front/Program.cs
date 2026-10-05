@@ -52,7 +52,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.UseHttpsRedirection(); // Désactivé pour Docker
 app.UseRouting();
 
 app.UseSession();

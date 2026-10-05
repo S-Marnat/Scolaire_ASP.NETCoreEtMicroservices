@@ -79,8 +79,6 @@ var app = builder.Build();
 
 
 // Pipeline HTTP
-//app.UseHttpsRedirection(); // Désactivé pour Docker
-
 app.UseAuthentication();
 app.UseAuthorization();
 

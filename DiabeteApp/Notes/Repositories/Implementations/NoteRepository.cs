@@ -23,13 +23,6 @@ namespace Notes.Repositories.Implementations
             return note;
         }
 
-        public async Task<bool> DeleteAsync(string id)
-        {
-            var filter = Builders<Note>.Filter.Eq(n => n.Id, id);
-            var result = await _notesCollection.DeleteOneAsync(filter);
-            return result.DeletedCount > 0;
-        }
-
         public async Task<Note?> GetByIdAsync(string id)
         {
             var filter = Builders<Note>.Filter.Eq(n => n.Id, id);
@@ -43,13 +36,6 @@ namespace Notes.Repositories.Implementations
                 .Find(filter)
                 .SortByDescending(n => n.DateCreation)
                 .ToListAsync();
-        }
-
-        public async Task<Note> UpdateAsync(Note note)
-        {
-            var filter = Builders<Note>.Filter.Eq(n => n.Id, note.Id);
-            var result = await _notesCollection.ReplaceOneAsync(filter, note);
-            return result.ModifiedCount > 0 ? note : null;
         }
     }
 }

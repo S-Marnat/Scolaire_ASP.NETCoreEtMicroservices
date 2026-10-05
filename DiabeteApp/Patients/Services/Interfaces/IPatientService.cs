@@ -8,6 +8,5 @@ namespace Patients.Services.Interfaces
         Task<PatientReadDto?> GetByIdAsync(int id);
         Task<PatientReadDto> CreateAsync(PatientCreateDto dto);
         Task<PatientReadDto?> UpdateAsync(int id, PatientUpdateDto dto);
-        Task<bool> DeleteAsync(int id);
     }
 }

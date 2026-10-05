@@ -31,12 +31,6 @@ namespace Notes.Services.Implementations
             return ToReadDto(created);
         }
 
-        public async Task<bool> DeleteAsync(string id)
-        {
-            // Appeler le repository
-            return await _noteRepository.DeleteAsync(id);
-        }
-
         public async Task<NoteReadDto?> GetByIdAsync(string id)
         {
             // Appeler le repository
@@ -56,27 +50,6 @@ namespace Notes.Services.Implementations
 
             // Mapper Domain -> DTO Read
             return entities.Select(ToReadDto).ToList();
-        }
-
-        public async Task<NoteReadDto?> UpdateAsync(string id, NoteUpdateDto dto)
-        {
-            // Récupérer l'entité existante
-            var entity = await _noteRepository.GetByIdAsync(id);
-
-            if (entity == null)
-                return null;
-
-            // Mapper DTO -> Domain
-            entity.Contenu = dto.Contenu;
-
-            // Appeler le repository
-            var updated = await _noteRepository.UpdateAsync(entity);
-
-            if (updated == null)
-                return null;
-
-            // Mapper Domain -> DTO Read
-            return ToReadDto(updated);
         }
 
 

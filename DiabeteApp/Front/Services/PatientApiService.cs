@@ -56,12 +56,6 @@ namespace Front.Services
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeletePatientAsync(int id)
-        {
-            var response = await SendWithRefreshAsync(() => _httpClient.DeleteAsync($"/patient/{id}"));
-            return response.IsSuccessStatusCode;
-        }
-
 
         // -- Méthodes utilitaires pour gérer le JWT et le RefreshToken --
         private void AddJwtHeader()

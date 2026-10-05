@@ -21,18 +21,6 @@ namespace Patients.Repositories.Implementations
             return patient;
         }
 
-        public async Task<bool> DeleteAsync(int id)
-        {
-            var patient = await _context.Patients.FindAsync(id);
-
-            if (patient == null)
-                return false;
-
-            _context.Patients.Remove(patient);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
         public async Task<IEnumerable<Patient>> GetAllAsync()
         {
             return await _context.Patients.ToListAsync();
